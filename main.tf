@@ -34,6 +34,7 @@ resource "aws_s3_bucket_object" "oidc_jwks" {
   key    = "/jwks.json"
   acl    = "public-read"
   source = var.oidc_jwks_filename
+  content_base64 = var.oidc_jwks_content_b64
 }
 
 resource "aws_iam_openid_connect_provider" "irsa" {

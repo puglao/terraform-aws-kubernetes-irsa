@@ -3,7 +3,14 @@ variable "oidc_s3_bucket_name" {
 }
 
 variable "oidc_jwks_filename" {
-  description = "Filename of OIDC JWKS"
+  description = "Filename of OIDC JWKS, conflict to oidc_jwks_content_b64"
+  default = null
+}
+
+variable "oidc_jwks_content_b64" {
+  description = "base64 encoded content of OIDC JWKS, conflict to oidc_jwks_filename"
+  default = null
+  sensitive = true
 }
 
 variable "oidc_ca_sha1" {
