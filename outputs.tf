@@ -5,7 +5,7 @@ output "oidc_provider_arn" {
 
 output "oidc_issuer" {
   description = "Domain name of the S3 bucket (*.s3.amazonaws.com)"
-  value       = aws_s3_bucket.oidc.bucket_domain_name
+  value       = aws_s3_bucket.oidc.bucket_regional_domain_name
 }
 
 output "pod_identity_webhook_ecr_repository_url" {
@@ -29,7 +29,7 @@ spec:
   kubeAPIServer:
     apiAudiences:
     - sts.amazonaws.com
-    serviceAccountIssuer: https://${aws_s3_bucket.oidc.bucket_domain_name}
+    serviceAccountIssuer: https://${aws_s3_bucket.oidc.bucket_regional_domain_name}
     serviceAccountKeyFile:
     - /srv/kubernetes/server.key
     - /srv/kubernetes/assets/service-account-key
