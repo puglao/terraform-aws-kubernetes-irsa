@@ -9,8 +9,8 @@ resource "aws_s3_bucket_object" "oidc_discovery" {
   acl     = "public-read"
   content = <<EOF
 {
-  "issuer": "https://${aws_s3_bucket.oidc.bucket_domain_name}/",
-  "jwks_uri": "https://${aws_s3_bucket.oidc.bucket_domain_name}/jwks.json",
+  "issuer": "https://${aws_s3_bucket.oidc.bucket_regional_domain_name}/",
+  "jwks_uri": "https://${aws_s3_bucket.oidc.bucket_regional_domain_name}/jwks.json",
   "authorization_endpoint": "urn:kubernetes:programmatic_authorization",
   "response_types_supported": [
     "id_token"
@@ -37,7 +37,7 @@ resource "aws_s3_bucket_object" "oidc_jwks" {
 }
 
 resource "aws_iam_openid_connect_provider" "irsa" {
-  url             = "https://${aws_s3_bucket.oidc.bucket_domain_name}"
+  url             = "https://${aws_s3_bucket.oidc.bucket_regional_domain_name}"
   client_id_list  = ["sts.amazonaws.com"]
   thumbprint_list = [var.oidc_ca_sha1]
 }
