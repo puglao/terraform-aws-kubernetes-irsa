@@ -1,9 +1,13 @@
 resource "aws_s3_bucket" "oidc" {
   bucket = var.oidc_s3_bucket_name
+}
+
+resource "aws_s3_bucket_acl" "oidc_bucket_acl" {
+  bucket = aws_s3_bucket.oidc.id
   acl    = "private"
 }
 
-resource "aws_s3_bucket_object" "oidc_discovery" {
+resource "aws_s3_object" "oidc_discovery" {
   bucket  = var.oidc_s3_bucket_name
   key     = "/.well-known/openid-configuration"
   acl     = "public-read"
