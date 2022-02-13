@@ -33,7 +33,7 @@ resource "aws_s3_object" "oidc_discovery" {
 EOF
 }
 
-resource "aws_s3_bucket_object" "oidc_jwks" {
+resource "aws_s3_object" "oidc_jwks" {
   bucket = var.oidc_s3_bucket_name
   key    = "/jwks.json"
   acl    = "public-read"
